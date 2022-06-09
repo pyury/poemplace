@@ -1,0 +1,199 @@
+  <!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>KU 22-1 문문지도</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+        <style>
+            html, body, #mapid{
+                height: 100%;
+                margin: 0;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id = 'mapid'>
+        </div>
+        <script>
+            var map = L.map('mapid').setView([37.5378, 127.0253], 11);
+            var osm = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+                attribution:'&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> Contributors'
+            }).addTo(map);
+            var GoogleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
+                maxZoom: 20,
+                subdomains:['mt0','mt1','mt2','mt3']
+            })
+            var GoogleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+                maxZoom: 20,
+                subdomains:['mt0','mt1','mt2','mt3']
+            })
+            var GoogleTerrain = L.tileLayer('http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}',{
+                maxZoom: 20,
+                subdomains:['mt0','mt1','mt2','mt3']
+            })
+            var GoogleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
+                maxZoom: 20,
+                subdomains:['mt0','mt1','mt2','mt3']
+            })
+            var Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
+                attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                subdomains: 'abcd',
+                minZoom: 1,
+                maxZoom: 16,
+                ext: 'jpg'
+            });
+
+            var baseMaps = {
+                "GoogleStreetMap": GoogleStreets,
+                "GoogleSatelliteMap":GoogleSat,
+                "GoogleTerrain":GoogleTerrain,
+                "GoogleHybrid":GoogleHybrid,
+                "Watercolor":Stamen_Watercolor,
+                "OpenStreetMap":osm
+            };
+            
+            L.control.layers(baseMaps).addTo(map);
+  
+            var myIcon = L.Icon.extend({
+                options: {
+                shadowUrl: '지도_아이콘/myicon_shadow.png',
+                iconSize:     [46, 62],
+                shadowSize:   [44, 22],
+                iconAnchor:   [23, 62],
+                shadowAnchor: [4, 22],
+                popupAnchor:  [0, -62]
+                }
+            });
+
+            var 터전Icon = new myIcon({iconUrl: '지도_아이콘/001.png'}),
+                자연Icon = new myIcon({iconUrl: '지도_아이콘/002.png'}),
+                교통Icon = new myIcon({iconUrl: '지도_아이콘/003.png'}),
+                관광Icon = new myIcon({iconUrl: '지도_아이콘/004.png'});
+                국가Icon = new myIcon({iconUrl: '지도_아이콘/005.png'});
+
+                L.icon = function (options) {
+                    return new L.Icon(options);
+                };
+            var marker = 
+            L.marker([	37.45696,	126.92094	], {icon:교통Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=410251&cid=43722&categoryId=43722	" target="_blank">	산복터널	</a>').addTo(map);
+            L.marker([	37.5798,	126.9769	], {icon:관광Icon}).bindPopup('<a href="	http://www.royalpalace.go.kr/	" target="_blank">	경복궁	</a>').addTo(map);
+            L.marker([	37.52166,	126.86365	], {icon:국가Icon}).bindPopup('<a href="	https://slnambu.scourt.go.kr/main/new/Main.work	" target="_blank">	서울남부지방법원	</a>').addTo(map);
+            L.marker([	37.50723,	126.87487	], {icon:교통Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=409262&cid=43722&categoryId=43722	" target="_blank">	서부간선도로	</a>').addTo(map);
+            L.marker([	37.5653,	126.9738	], {icon:국가Icon}).bindPopup('<a href="	https://www.seoul.go.kr/main/index.jsp	" target="_blank">	서울	</a>').addTo(map);
+            L.marker([	37.5213,	126.9122	], {icon:터전Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=1929213&cid=40942&categoryId=34709	" target="_blank">	영등포기계상가	</a>').addTo(map);
+            L.marker([	37.5217,	126.9243	], {icon:교통Icon}).bindPopup('<a href="	http://encykorea.aks.ac.kr/Contents/SearchNavi?keyword=%EC%97%AC%EC%9D%98%EB%8F%84&ridx=0&tot=36	" target="_blank">	여의도 역	</a>').addTo(map);
+            L.marker([	37.5355,	126.9739	], {icon:터전Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=402922&cid=43722&categoryId=43722	" target="_blank">	삼각지	</a>').addTo(map);
+            L.marker([	37.52547,	126.95353	], {icon:교통Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=532222&cid=46632&categoryId=46632	" target="_blank">	한강대교북단	</a>').addTo(map);
+            L.marker([	37.5717,	126.9864	], {icon:터전Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=796122&cid=46618&categoryId=46618	" target="_blank">	인사동	</a>').addTo(map);
+            L.marker([	37.53425,	126.95395	], {icon:터전Icon}).bindPopup('<a href="	https://sacredheart.sen.hs.kr/	" target="_blank">	성심여고후문	</a>').addTo(map);
+            L.marker([	37.53693,	126.95303	], {icon:터전Icon}).bindPopup('<a href="	http://www.yongsanch.or.kr/	" target="_blank">	용산성당	</a>').addTo(map);
+            L.marker([	37.53354,	126.95689	], {icon:터전Icon}).bindPopup('<a href="	https://map.naver.com/v5/entry/place/20835778?c=14132431.9249931,4513719.8099967,13,0,0,0,dh&placePath=%2Fhome%3Fentry=plt	" target="_blank">	청노루힐빌라	</a>').addTo(map);
+            L.marker([	37.53339,	126.95717	], {icon:터전Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=404655&cid=43722&categoryId=43722	" target="_blank">	원효로4가	</a>').addTo(map);
+            L.marker([	37.5356,	126.9503	], {icon:터전Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=1216621&cid=40942&categoryId=34709	" target="_blank">	산천동	</a>').addTo(map);
+            L.marker([	37.5311,	126.9811	], {icon:터전Icon}).bindPopup('<a href="	https://www.yongsan.go.kr/portal/main/main.do	" target="_blank">	용산	</a>').addTo(map);
+            L.marker([	37.44453,	126.964	], {icon:자연Icon}).bindPopup('<a href="	https://www.gwanak.go.kr/site/gwanak/05/10503020100002016051205.jsp	" target="_blank">	관악산	</a>').addTo(map);
+            L.marker([	37.5677,	126.9784	], {icon:터전Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=1094550&cid=40942&categoryId=34709	" target="_blank">	무교동	</a>').addTo(map);
+            L.marker([	37.5594,	126.9773	], {icon:터전Icon}).bindPopup('<a href="	http://namdaemunmarket.co.kr/	" target="_blank">	남대문시장	</a>').addTo(map);
+            L.marker([	37.6085308,	127.0201946	], {icon:터전Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=1190985&cid=40942&categoryId=34709	" target="_blank">	길음동	</a>').addTo(map);
+            L.marker([	37.5385,	126.992	], {icon:터전Icon}).bindPopup('<a href="	http://encykorea.aks.ac.kr/Contents/Item/E0068370	" target="_blank">	이태원	</a>').addTo(map);
+            L.marker([	37.48456,	127.03405	], {icon:터전Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=1315942&cid=40942&categoryId=32346	" target="_blank">	말죽거리	</a>').addTo(map);
+            L.marker([	37.4844005,	127.0341455	], {icon:교통Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=404113&cid=43722&categoryId=43722	" target="_blank">	양재역	</a>').addTo(map);
+            L.marker([	37.4705648,	127.0496991	], {icon:교통Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=409355&cid=43722&categoryId=43722	" target="_blank">	양재대로	</a>').addTo(map);
+            L.marker([	37.5329,	126.9821	], {icon:국가Icon}).bindPopup('<a href="	https://www.park.go.kr/front/index.do	" target="_blank">	미8군사령부	</a>').addTo(map);
+            L.marker([	37.52989,	126.95192	], {icon:자연Icon}).bindPopup('<a href="	http://encykorea.aks.ac.kr/Contents/Item/E0060950	" target="_blank">	한강	</a>').addTo(map);
+            L.marker([	37.54008,	126.92684	], {icon:터전Icon}).bindPopup('<a href="	https://hangang.seoul.go.kr/archives/19690	" target="_blank">	밤섬	</a>').addTo(map);
+            L.marker([	37.53672,	126.94288	], {icon:터전Icon}).bindPopup('<a href="	https://map.naver.com/v5/search/%ED%95%9C%EC%8B%A0%EC%98%A4%ED%94%BC%EC%8A%A4%ED%85%94/place/1923654684?placePath=%3Fentry=pll%26from=nx%26fromNxList=true&placeSearchOption=entry=pll%26fromNxList=true&c=14130917.0782304,4514352.9618821,15,0,0,0,dh	" target="_blank">	한신오피스텔	</a>').addTo(map);
+            L.marker([	37.53786,	126.94868	], {icon:자연Icon}).bindPopup('<a href="	https://map.naver.com/v5/search/%EC%82%BC%EA%B0%9C%EB%A1%9C5%EC%95%88%EA%B8%B8/place/19691003?placePath=%3Fentry=pll%26from=nx%26fromNxList=true&placeSearchOption=entry=pll%26fromNxList=true&c=14131378.0188460,4514364.4455012,15,0,0,0,dh	" target="_blank">	삼개로5안길	</a>').addTo(map);
+            L.marker([	37.54008,	126.92684	], {icon:터전Icon}).bindPopup('<a href="	https://hangang.seoul.go.kr/archives/19690	" target="_blank">	윗밤섬	</a>').addTo(map);
+            L.marker([	37.54008,	126.92684	], {icon:터전Icon}).bindPopup('<a href="	https://hangang.seoul.go.kr/archives/19690	" target="_blank">	아랫밤섬	</a>').addTo(map);
+            L.marker([	37.53629,	126.95342	], {icon:터전Icon}).bindPopup('<a href="	http://www.gskg.kr/	" target="_blank">	계성유치원	</a>').addTo(map);
+            L.marker([	37.56004,	126.93692	], {icon:터전Icon}).bindPopup('<a href="	https://www.yonsei.ac.kr/sc/index.jsp	" target="_blank">	연세대	</a>').addTo(map);
+            L.marker([	37.52044,	127.11229	], {icon:터전Icon}).bindPopup('<a href="	http://jsparkrio.com/	" target="_blank">	잠실시영아파트	</a>').addTo(map);
+            L.marker([	37.52648,	127.10961	], {icon:교통Icon}).bindPopup('<a href="	https://www.amc.seoul.kr/asan/main.do	" target="_blank">	아산병원	</a>').addTo(map);
+            L.marker([	37.5338,	127.111	], {icon:터전Icon}).bindPopup('<a href="	https://map.naver.com/v5/entry/place/13176591?c=14150377.450673211,4512822.875275215,13,0,0,0,dh&placePath=%2Fhome%3Fentry=plt	" target="_blank">	현대아산약국	</a>').addTo(map);
+            L.marker([	37.5316,	127.1093	], {icon:교통Icon}).bindPopup('<a href="	http://gangnam.grandculture.net/gangnam/toc/GC04800158	" target="_blank">	올림픽대로	</a>').addTo(map);
+            L.marker([	37.5429,	127.1273	], {icon:터전Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=1190889&cid=40942&categoryId=33749	" target="_blank">	천호동	</a>').addTo(map);
+            L.marker([	37.55821,	126.89319	], {icon:교통Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=1057025&cid=40942&categoryId=32346	" target="_blank">	강변도시고속도로	</a>').addTo(map);
+            L.marker([	37.5623,	126.9088	], {icon:터전Icon}).bindPopup('<a href="	https://www.mapo.go.kr/html/corona/intro.htm	" target="_blank">	마포	</a>').addTo(map);
+            L.marker([	37.4983,	127.0655	], {icon:터전Icon}).bindPopup('<a href="	null	" target="_blank">	레몬트리	</a>').addTo(map);
+            L.marker([	37.59332,	127.01285	], {icon:터전Icon}).bindPopup('<a href="	https://donam.sen.es.kr/	" target="_blank">	돈암초등학교	</a>').addTo(map);
+            L.marker([	37.59791,	127.02175	], {icon:터전Icon}).bindPopup('<a href="	https://www.hani.co.kr/arti/society/society_general/98443.html	" target="_blank">	돈암탕	</a>').addTo(map);
+            L.marker([	37.5713,	126.9799	], {icon:터전Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=1216312&cid=40942&categoryId=34709	" target="_blank">	청진동	</a>').addTo(map);
+            L.marker([	37.5805,	126.9078	], {icon:터전Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=407473&cid=43722&categoryId=43722	" target="_blank">	불광천	</a>').addTo(map);
+            L.marker([	37.60902,	126.93112	], {icon:교통Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=410232&cid=43722&categoryId=43722	" target="_blank">	불광역	</a>').addTo(map);
+            L.marker([	37.5704,	126.9923	], {icon:터전Icon}).bindPopup('<a href="	http://encykorea.aks.ac.kr/Contents/SearchNavi?keyword=%EC%9A%A9%EC%82%B0%EC%97%AD&ridx=0&tot=900	" target="_blank">	종로3가	</a>').addTo(map);
+            L.marker([	37.51806,	126.97586	], {icon:터전Icon}).bindPopup('<a href="	https://hangang.seoul.go.kr/archives/46758	" target="_blank">	용산4구역 남일당 망루	</a>').addTo(map);
+            L.marker([	37.5301906,	126.9651428	], {icon:교통Icon}).bindPopup('<a href="	https://hangang.seoul.go.kr/archives/46758	" target="_blank">	용산역	</a>').addTo(map);
+            L.marker([	37.526,	126.9358	], {icon:자연Icon}).bindPopup('<a href="	http://encykorea.aks.ac.kr/Contents/SearchNavi?keyword=%EA%B0%80%EC%96%91%EB%8C%80%EA%B5%90&ridx=0&tot=131	" target="_blank">	고수부지	</a>').addTo(map);
+            L.marker([	37.526,	126.9358	], {icon:자연Icon}).bindPopup('<a href="	http://encykorea.aks.ac.kr/Contents/SearchNavi?keyword=%EC%9E%90%EC%9C%A0%EB%A1%9C&ridx=3&tot=531	" target="_blank">	한강둔치	</a>').addTo(map);
+            L.marker([	37.5717,	126.863	], {icon:교통Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=409606&cid=43722&categoryId=43722	" target="_blank">	가양대교	</a>').addTo(map);
+            L.marker([	37.5715,	126.8717	], {icon:교통Icon}).bindPopup('<a href="	http://encykorea.aks.ac.kr/Contents/SearchNavi?keyword=%EB%AA%85%EB%8F%99&ridx=0&tot=31	" target="_blank">	자유로	</a>').addTo(map);
+            L.marker([	37.5376,	127.0062	], {icon:터전Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=401122&cid=43722&categoryId=43722	" target="_blank">	한남동 17-7번지 현대 나 주택 301호	</a>').addTo(map);
+            L.marker([	37.5606753,	126.9848244	], {icon:터전Icon}).bindPopup('<a href="	http://encykorea.aks.ac.kr/Contents/SearchNavi?keyword=%EC%B2%AD%EB%9F%89%EB%A6%AC%EC%97%AD&ridx=0&tot=817	" target="_blank">	명동	</a>').addTo(map);
+            L.marker([	37.6361498,	126.9187464	], {icon:터전Icon}).bindPopup('<a href="	https://gwanghwamun.seoul.go.kr/main.do	" target="_blank">	구파발	</a>').addTo(map);
+            L.marker([	37.5799754,	127.0446284	], {icon:교통Icon}).bindPopup('<a href="	https://www.opencheongwadae.kr/main/	" target="_blank">	청량리역	</a>').addTo(map);
+            L.marker([	37.57593,	126.97683	], {icon:관광Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=1190837&cid=40942&categoryId=34709	" target="_blank">	광화문	</a>').addTo(map);
+            L.marker([	37.58663,	126.97618	], {icon:관광Icon}).bindPopup('<a href="	https://www.jongno.go.kr/portalMain.do;jsessionid=oQSwGezsORmWCs6WUk6b6XheRbOPayxw0p8LgZiyfOULM5j0731Xo815YjFmXWqk.was_servlet_engine1#	" target="_blank">	청와대	</a>').addTo(map);
+            L.marker([	37.586829,	127.0006022	], {icon:터전Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=1133610&cid=40942&categoryId=32346	" target="_blank">	혜화	</a>').addTo(map);
+            L.marker([	37.57349,	126.979	], {icon:터전Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=1190787&cid=40942&categoryId=33749	" target="_blank">	종로	</a>').addTo(map);
+            L.marker([	37.5663363,	126.9925305	], {icon:터전Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=1190881&cid=40942&categoryId=33749	" target="_blank">	을지로	</a>').addTo(map);
+            L.marker([	37.5558,	126.9009	], {icon:터전Icon}).bindPopup('<a href="	https://map.naver.com/v5/search/%EB%A7%88%ED%8F%AC%20%EB%82%A8%EA%B2%BD%EC%9E%A5/place/13160073?placePath=%3Fentry%253Dpll&c=14127070.3553024,4516491.9260917,15,0,0,0,dh	" target="_blank">	망원동	</a>').addTo(map);
+            L.marker([	37.5334,	127.1114	], {icon:터전Icon}).bindPopup('<a href="	http://encykorea.aks.ac.kr/Contents/SearchNavi?keyword=%EC%96%91%ED%99%94%EC%A7%84%EC%99%B8%EA%B5%AD%EC%9D%B8%EC%84%A0%EA%B5%90%EC%82%AC%EB%AC%98%EC%9B%90&ridx=0&tot=17622	" target="_blank">	풍납동	</a>').addTo(map);
+            L.marker([	37.5526,	126.9184	], {icon:자연Icon}).bindPopup('<a href="	https://hangang.seoul.go.kr/archives/46737	" target="_blank">	남경장	</a>').addTo(map);
+            L.marker([	37.54566,	126.91117	], {icon:자연Icon}).bindPopup('<a href="	http://encykorea.aks.ac.kr/Contents/SearchNavi?keyword=%EC%96%91%ED%99%94%EB%8C%80%EA%B5%90&ridx=0&tot=172	" target="_blank">	양화진 성지공원	</a>').addTo(map);
+            L.marker([	37.555,	126.8953	], {icon:교통Icon}).bindPopup('<a href="	http://www.exterminal.co.kr/	" target="_blank">	망원한강지구	</a>').addTo(map);
+            L.marker([	37.5425,	126.9031	], {icon:교통Icon}).bindPopup('<a href="	https://gwanghwamun.seoul.go.kr/main.do	" target="_blank">	양화대교	</a>').addTo(map);
+            L.marker([	37.5047,	127.0053	], {icon:교통Icon}).bindPopup('<a href="	http://encykorea.aks.ac.kr/Contents/SearchNavi?keyword=%EB%8F%88%EC%9D%98%EB%AC%B8&ridx=0&tot=4435	" target="_blank">	반포터미널	</a>').addTo(map);
+            L.marker([	37.5047,	127.0053	], {icon:관광Icon}).bindPopup('<a href="	null	" target="_blank">	광화문 네거리	</a>').addTo(map);
+L.marker([	37.56823,	126.96449	], {icon:관광Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=1190993&cid=40942&categoryId=33749	" target="_blank">	서대문	</a>').addTo(map);
+L.marker([	37.5138,	127.03515	], {icon:터전Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=1190997&cid=40942&categoryId=34709	" target="_blank">	임피리얼 팰리스 호텔	</a>').addTo(map);
+L.marker([	37.5960,    126.9949	], {icon:터전Icon}).bindPopup('<a href="	http://encykorea.aks.ac.kr/Contents/SearchNavi?keyword=%EC%B0%BD%EA%B2%BD%EC%9B%90&ridx=0&tot=5932	" target="_blank">	성북동	</a>').addTo(map);
+L.marker([	37.5961,	127.0338	], {icon:터전Icon}).bindPopup('<a href="	http://encykorea.aks.ac.kr/Contents/SearchNavi?keyword=%EC%84%9C%EC%9A%B8%EC%97%AD&ridx=0&tot=3108	" target="_blank">	종암동	</a>').addTo(map);
+L.marker([	37.5802,	126.9949	], {icon:관광Icon}).bindPopup('<a href="	https://botanicpark.seoul.go.kr/front/main.do	" target="_blank">	창경원	</a>').addTo(map);
+L.marker([	37.5534,	126.9698	], {icon:교통Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=1190790&cid=40942&categoryId=34709	" target="_blank">	서울역	</a>').addTo(map);
+L.marker([	37.5689,	126.8343	], {icon:자연Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=1190799&cid=40942&categoryId=33749	" target="_blank">	서울식물원	</a>').addTo(map);
+L.marker([	37.5529,	126.9183	], {icon:터전Icon}).bindPopup('<a href="	https://gwanghwamun.seoul.go.kr/main.do	" target="_blank">	서교동	</a>').addTo(map);
+L.marker([	37.5465,	126.9088	], {icon:터전Icon}).bindPopup('<a href="	https://www.minjuroad.or.kr/location/268	" target="_blank">	합정동	</a>').addTo(map);
+L.marker([	37.5716162,	126.9769026	], {icon:관광Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=1190815&cid=40942&categoryId=33749	" target="_blank">	광화문 광장	</a>').addTo(map);
+L.marker([	37.5528,	126.9414	], {icon:터전Icon}).bindPopup('<a href="	https://www.ydp.go.kr/www/index.do	" target="_blank">	신촌 노고산 이한열기념관	</a>').addTo(map);
+L.marker([	37.5086,	126.8915	], {icon:터전Icon}).bindPopup('<a href="	http://encykorea.aks.ac.kr/Contents/SearchNavi?keyword=%ED%8F%89%ED%99%94%EC%8B%9C%EC%9E%A5&ridx=0&tot=522	" target="_blank">	신도림	</a>').addTo(map);
+L.marker([	37.5255,	126.8967	], {icon:터전Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=1384011&cid=40942&categoryId=34709	" target="_blank">	영등포	</a>').addTo(map);
+L.marker([	37.56927,	127.005992	], {icon:터전Icon}).bindPopup('<a href="	null	" target="_blank">	평화시장	</a>').addTo(map);
+L.marker([	37.5486897,	126.9142951	], {icon:교통Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=1381588&cid=40942&categoryId=34709	" target="_blank">	합정역	</a>').addTo(map);
+L.marker([	37.547953,	126.9131938	], {icon:터전Icon}).bindPopup('<a href="	http://encykorea.aks.ac.kr/Contents/SearchNavi?keyword=%EC%A7%84%EA%B4%80%EC%82%AC&ridx=0&tot=12468	" target="_blank">	그리운 금강산	</a>').addTo(map);
+L.marker([	37.5002114,	127.0267345	], {icon:교통Icon}).bindPopup('<a href="	https://www.ep.go.kr/www/index.do	" target="_blank">	강남역	</a>').addTo(map);
+L.marker([	37.63821,	126.9461	], {icon:터전Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=406815&cid=43722&categoryId=43722	" target="_blank">	진관사	</a>').addTo(map);
+L.marker([	37.6033,	126.93	], {icon:자연Icon}).bindPopup('<a href="	https://forest.yonsei.ac.kr/	" target="_blank">	은평	</a>').addTo(map);
+L.marker([	37.6209,	126.867	], {icon:터전Icon}).bindPopup('<a href="	https://yoondongju.yonsei.ac.kr/yoondongju_m/index.do	" target="_blank">	창릉천 (덕수천)	</a>').addTo(map);
+L.marker([	37.56627,	126.94072	], {icon:자연Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=1190828&cid=40942&categoryId=34709	" target="_blank">	청송대	</a>').addTo(map);
+L.marker([	37.5654,	126.93732	], {icon:터전Icon}).bindPopup('<a href="	https://terms.naver.com/entry.naver?docId=1119250&cid=40942&categoryId=34709	" target="_blank">	핀슨 홀	</a>').addTo(map);
+L.marker([	37.5766,126.9581	], {icon:터전Icon}).bindPopup('<a href="	https://www.sisul.or.kr/open_content/cheonggye/	" target="_blank">	무악	</a>').addTo(map);
+L.marker([	37.5594,	126.9423	], {icon:터전Icon}).bindPopup('<a href="	https://www.sisul.or.kr/open_content/cheonggye/	" target="_blank">	신촌	</a>').addTo(map);
+L.marker([	37.5678,	126.9947	], {icon:자연Icon}).bindPopup('<a href="	https://www.sisul.or.kr/open_content/cheonggye/	" target="_blank">	청계천	</a>').addTo(map);
+L.marker([	37.5046897,	127.0488403	], {icon:자연Icon}).bindPopup('<a href="	https://www.sisul.or.kr/open_content/cheonggye/	" target="_blank">	선릉의 돌담길	</a>').addTo(map);
+L.marker([	37.55586,	126.90087	], {icon:터전Icon}).bindPopup('<a href="	null	" target="_blank">	망원	</a>').addTo(map);
+L.marker([	37.56222,	126.9022	], {icon:교통Icon}).bindPopup('<a href="	null	" target="_blank">	마포구청역	</a>').addTo(map);
+L.marker([	37.609033,	127.0303467	], {icon:교통Icon}).bindPopup('<a href="	null	" target="_blank">	미아사거리 2번출구	</a>').addTo(map);
+L.marker([	37.6129692,	127.0306492	], {icon:터전Icon}).bindPopup('<a href="	null	" target="_blank">	투썸플레이스	</a>').addTo(map);
+L.marker([	37.5704405,	126.9923242	], {icon:터전Icon}).bindPopup('<a href="	null	" target="_blank">	종로 3가	</a>').addTo(map);
+L.marker([	37.6152945,	127.0299205	], {icon:터전Icon}).bindPopup('<a href="	null	" target="_blank">	도봉로 10길	</a>').addTo(map);
+L.marker([	37.5345026,	126.9943705	], {icon:터전Icon}).bindPopup('<a href="	null	" target="_blank">	이태원 클럽	</a>').addTo(map);
+L.marker([	37.60371,	127.05737	], {icon:관광Icon}).bindPopup('<a href="	null	" target="_blank">	의릉	</a>').addTo(map);
+L.marker([	37.49268,	126.93412	], {icon:터전Icon}).bindPopup('<a href="	null	" target="_blank">	장미주택	</a>').addTo(map);
+L.marker([	37.5971,	127.0369	], {icon:자연Icon}).bindPopup('<a href="	null	" target="_blank">	정릉천	</a>').addTo(map);
+L.marker([	null,	null	], {icon:교통Icon}).bindPopup('<a href="	null	" target="_blank">	경부고속도로	</a>').addTo(map);
+L.marker([	37.5198,	126.9522	], {icon:교통Icon}).bindPopup('<a href="	null	" target="_blank">	한강철교	</a>').addTo(map);
+L.marker([	37.4983,	127.0655	], {icon:터전Icon}).bindPopup('<a href="	null	" target="_blank">	강남	</a>').addTo(map);
+L.marker([	37.47886,	127.01248	], {icon:관광Icon}).bindPopup('<a href="	null	" target="_blank">	예술의전당	</a>').addTo(map);
+L.marker([	37.56253,	127.00082	], {icon:터전Icon}).bindPopup('<a href="	null	" target="_blank">	청계천 기계공구 상가	</a>').addTo(map);
+L.marker([	37.53185,	126.9142	], {icon:국가Icon}).bindPopup('<a href="	null	" target="_blank">	국회	</a>').addTo(map);
+L.marker([	37.5740339,	126.976775	], {icon:관광Icon}).bindPopup('<a href="	null	" target="_blank">	광화문광장	</a>').addTo(map);
+L.marker([	37.56501,	126.97653	], {icon:관광Icon}).bindPopup('<a href="	null	" target="_blank">	대한문	</a>').addTo(map);
+							
+														
+	    </script> 
+    </body>
+</html>
+
