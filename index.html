@@ -58,7 +58,7 @@
   
             var myIcon = L.Icon.extend({
                 options: {
-                shadowUrl: '지도_아이콘/myicon_shadow.png',
+                shadowUrl: 'image/myicon_shadow.png',
                 iconSize:     [46, 62],
                 shadowSize:   [44, 22],
                 iconAnchor:   [23, 62],
@@ -67,11 +67,11 @@
                 }
             });
 
-            var 터전Icon = new myIcon({iconUrl: '지도_아이콘/001.png'}),
-                자연Icon = new myIcon({iconUrl: '지도_아이콘/002.png'}),
-                교통Icon = new myIcon({iconUrl: '지도_아이콘/003.png'}),
-                관광Icon = new myIcon({iconUrl: '지도_아이콘/004.png'});
-                국가Icon = new myIcon({iconUrl: '지도_아이콘/005.png'});
+            var 터전Icon = new myIcon({iconUrl: 'image/001.png'}),
+                자연Icon = new myIcon({iconUrl: 'image/002.png'}),
+                교통Icon = new myIcon({iconUrl: 'image/003.png'}),
+                관광Icon = new myIcon({iconUrl: 'image/004.png'});
+                국가Icon = new myIcon({iconUrl: 'image/005.png'});
 
                 L.icon = function (options) {
                     return new L.Icon(options);
